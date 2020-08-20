@@ -1,0 +1,3 @@
+include ':AndroidSmoothBluetooth'
+include ':app'
+rootProject.name = "Toolbox"

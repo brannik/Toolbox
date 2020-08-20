@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">Toolbox</string>
+
+    <string name="add_widget">Add widget</string>
+    <string name="drlSwitch">DRL</string>
+    <string name="intSwitch">INTERIOR</string>
+    <string name="txtDrlState">OFF</string>
+    <string name="txtInterState">OFF</string>
+    <string name="settSwitch">SETTINGS</string>
+    <string name="txtShifts">N</string>
+    <string name="appwidget_text">EXAMPLE</string>
+
+    <string name="imgDesc">EXAMPLE</string>
+
+    <string name="lblDrlDelay">DRL Delay</string>
+    <string name="btnDrlDelay">SAVE</string>
+
+    <string name="lblInterDelay">Interior Delay</string>
+    <string name="btnInterDelay">SAVE</string>
+
+    <string name="lblDrlState">DRL</string>
+    <string name="lblInterState">Interior</string>
+
+    <string name="tglDrl">DRL</string>
+    <string name="tglDrlOn">Auto ON</string>
+    <string name="tglDrlOff">OFF</string>
+
+    <string name="tglInterior">Interior</string>
+    <string name="tglInteriorOn">Auto ON</string>
+    <string name="tglInteriorOff">OFF</string>
+</resources>
