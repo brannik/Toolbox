@@ -17,6 +17,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RemoteViews;
 import android.widget.TextView;
@@ -45,12 +46,7 @@ public class allinone extends AppWidgetProvider {
         remoteViews = new RemoteViews(context.getPackageName(),
                 R.layout.allinone);
         // get new values and set text
-        for (int i=0; i<appWidgetIds.length; i++) {
-
-
-
-            int widgetId = appWidgetIds[i];
-
+        for (int widgetId : appWidgetIds) {
 
 
             Intent intent = new Intent(context, AppWidgetProvider.class);
@@ -66,13 +62,9 @@ public class allinone extends AppWidgetProvider {
             //Log.d("DEBUG", "Refresh");
 
         }
-
-
         reader = switchFunc.getStates(INTERIOR_BTN_EVENT);
         readerTmp = switchFunc.getStates(DRL_BTN_EVENT);
         status(readerTmp,reader);
-
-
     }
 
 
@@ -82,23 +74,22 @@ public class allinone extends AppWidgetProvider {
                 R.layout.allinone);
         if (DRL_BTN_EVENT.equals(intent.getAction())) {
             // your onClick action is here
-
             switchFunc.updateState(DRL_BTN_EVENT);
             reader = switchFunc.getStates(DRL_BTN_EVENT);
+
             //Toast.makeText(context, "DRL STATE: " + reader, Toast.LENGTH_SHORT).show();
+
             onUpdate(context);
             //Log.d("DEBUG", "BTN DRL CLICK");
-
         } else if (INTERIOR_BTN_EVENT.equals(intent.getAction())) {
 
             switchFunc.updateState(INTERIOR_BTN_EVENT);
             reader = switchFunc.getStates(INTERIOR_BTN_EVENT);
             //Toast.makeText(context, "INTERIOR STATE: " + reader, Toast.LENGTH_SHORT).show();
+
             onUpdate(context);
             //Log.d("DEBUG", "BTN INTER CLICK");
         }
-
-
     }
 
 
@@ -110,7 +101,6 @@ public class allinone extends AppWidgetProvider {
     }
 
     public void onUpdate(Context context) {
-
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
         ComponentName thisAppWidgetComponentName = new ComponentName(context.getPackageName(), getClass().getName());
         int[] appWidgetIds = appWidgetManager.getAppWidgetIds(thisAppWidgetComponentName);
@@ -185,9 +175,6 @@ public class allinone extends AppWidgetProvider {
         WindowManager windowManager = (WindowManager) applicationContext.getSystemService(applicationContext.WINDOW_SERVICE);
         windowManager.addView(ll, parameters);
     }
-
-
-
 
 }
 

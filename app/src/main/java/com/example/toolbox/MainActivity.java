@@ -37,7 +37,6 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         contextOfApplication = getApplicationContext();
-
         startService(new Intent(this, worker.class));
 
         checkPrefs();

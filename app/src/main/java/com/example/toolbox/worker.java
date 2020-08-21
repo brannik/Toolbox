@@ -1,16 +1,22 @@
 package com.example.toolbox;
 import android.app.Service;
 import android.content.Intent;
+import android.net.sip.SipSession;
 import android.os.IBinder;
+import android.widget.Toast;
+
 import androidx.annotation.Nullable;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import io.palaima.smoothbluetooth.SmoothBluetooth;
+
 
 public class worker extends Service {
+    public static final String UPDATE = "update_states_send_to_arduino";
     public String tmp,tmmp;
+    public String oldTmp,oldTmmp;
     switches func = new switches();
-    bluetoothConn bt = new bluetoothConn();
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
@@ -27,24 +33,27 @@ public class worker extends Service {
                                       @Override
                                       public void run() {
                                           // Magic here
-                                          tmp = func.getStates("drlButton");
-                                          tmmp = func.getStates("interiorBtn");
-                                          /*
-                                          try {
-                                              bt.sendData();
-                                          } catch (IOException e) {
-                                              e.printStackTrace();
-                                          }*/
-                                         // Log.d("DEBUG",">> Timer tick");
+                                          if(checkStates()){
+                                              sendCommand(UPDATE);
+                                          }
                                       }
                                   },
-                0, 1000);   // 1000 Millisecond  = 1 second
+                0, 5000);   // 1000 Millisecond  = 1 second
     }
-    private static class workerFunctions{
-        private String drlState,interState;
-        public void checkStates(){
-
+    public Boolean checkStates(){
+        Boolean changed = false;
+        tmp = func.getStates("drlButton");
+        tmmp = func.getStates("interiorBtn");
+        if(tmp.equals(oldTmmp) & tmmp.equals(oldTmmp)){
+            changed = false;
+        }else{
+            changed = true;
         }
+        return changed;
+    }
+
+    public void sendCommand(String command){
+
     }
 
 }
