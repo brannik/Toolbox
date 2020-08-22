@@ -53,7 +53,8 @@ public class worker extends Service {
     }
 
     public void sendCommand(String command){
-
+        //btConn bt = new btConn();
+        //bt.send();
     }
 
 }
