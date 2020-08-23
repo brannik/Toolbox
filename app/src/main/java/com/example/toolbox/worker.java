@@ -33,12 +33,12 @@ public class worker extends Service {
         super.onCreate();
         oldTmp = func.getStates("drlButton");
         oldTmmp = func.getStates("interiorBtn");
-            try {
-                bt.findBT();
-                bt.openBT();
-            } catch (Exception e) {
-                Log.d("DEBUG", "WORKER>> " + e);
-            }
+        bt.findBT();
+        try {
+            bt.openBT();
+        } catch (Exception e) {
+            Log.d("DEBUG", "WORKER>> " + e);
+        }
 
 
         Timer timer = new Timer();
