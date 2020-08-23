@@ -80,9 +80,9 @@ public class btConn extends Activity {
         Log.d("DEBUG","Bluetooth OPENED");
     }
 
-    void beginListenForData() {
-
-        final Handler handler = new Handler(Looper.getMainLooper());
+    void beginListenForData()
+    {
+        final Handler handler = new Handler();
         final byte delimiter = 10; //This is the ASCII code for a newline character
 
         stopWorker = false;
@@ -101,7 +101,6 @@ public class btConn extends Activity {
                         {
                             byte[] packetBytes = new byte[bytesAvailable];
                             mmInputStream.read(packetBytes);
-
                             for(int i=0;i<bytesAvailable;i++)
                             {
                                 byte b = packetBytes[i];
@@ -109,14 +108,14 @@ public class btConn extends Activity {
                                 {
                                     byte[] encodedBytes = new byte[readBufferPosition];
                                     System.arraycopy(readBuffer, 0, encodedBytes, 0, encodedBytes.length);
-                                    final String data = new String(encodedBytes, StandardCharsets.US_ASCII);
+                                    final String data = new String(encodedBytes, StandardCharsets.ISO_8859_1);
                                     readBufferPosition = 0;
-                                    //Log.d("DEBUG","TOP@>> " + data);
+
                                     handler.post(new Runnable()
                                     {
                                         public void run()
                                         {
-                                            Log.d("DEBUG","@>> " + data.toString());
+                                            Log.d("DEBUG","data>>" + data);
                                         }
                                     });
                                 }
