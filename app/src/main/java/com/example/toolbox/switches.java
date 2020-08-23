@@ -10,16 +10,17 @@ public class switches{
     Context applicationContext = MainActivity.getContextOfApplication();
     SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(applicationContext);
 
-    public String drlState,interState,drlDelay,interDelay,drlDeffState,interDeffState;
+    public String drlState,interState,drlDelay,interDelay,drlDeffState,interDeffState,btState;
     private void checkPrefs(){
 
-        if (prefs.contains("drlState") & prefs.contains("interDeffState")) {
+        if (prefs.contains("drlState") & prefs.contains("bluetoothState")) {
             drlState = prefs.getString("drlState",null);
             interState = prefs.getString("interState",null);
             drlDelay = prefs.getString("drlDelay",null);
             interDelay = prefs.getString("interDelay",null);
             drlDeffState = prefs.getString("drlDeffState",null);
             interDeffState = prefs.getString("interDeffState",null);
+            btState = prefs.getString("bluetoothState",null);
         } else {
 
             SharedPreferences.Editor editor = prefs.edit();
@@ -29,6 +30,7 @@ public class switches{
             editor.putString("interDelay","36");
             editor.putString("drlDeffState","OFF");
             editor.putString("interDeffState","OFF");
+            editor.putString("bluetoothState","OFFLINE");
             editor.apply();
             editor.commit();
         }
@@ -57,11 +59,19 @@ public class switches{
         }
         editor.putString("drlState", drlState);
         editor.putString("interState",interState);
-        editor.commit();
+        editor.apply();
         //return state;
     }
 
-
+    public void updateBluethhothState(Boolean st){
+        SharedPreferences.Editor editor = prefs.edit();
+        if(st){
+            editor.putString("bluetoothState","ONLINE");
+        }else{
+            editor.putString("bluetoothState","OFFLINE");
+        }
+        editor.apply();
+    }
 
     public String getStates(String elem){
         checkPrefs();
@@ -72,6 +82,9 @@ public class switches{
                 break;
             case "interiorBtn":
                 stateGetter = interState;
+                break;
+            case "bluetooth":
+                stateGetter = btState;
                 break;
             default:
                 stateGetter = "error";

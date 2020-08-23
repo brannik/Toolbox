@@ -33,7 +33,6 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
         return contextOfApplication;
     }
 
-    btConn bt = new btConn();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -125,7 +124,7 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
 
     private void checkPrefs(){
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(contextOfApplication);
-        if (prefs.contains("drlState") & prefs.contains("interDeffState")) {
+        if (prefs.contains("drlState") & prefs.contains("bluetoothState")) {
             drlState = prefs.getString("drlState",null);
             interState = prefs.getString("interState",null);
             drlDelay = prefs.getString("drlDelay",null);
@@ -141,6 +140,7 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
             editor.putString("interDelay","36");
             editor.putString("drlDeffState","OFF");
             editor.putString("interDeffState","OFF");
+            editor.putString("bluetoothState","OFFLINE");
             editor.apply();
         }
     }

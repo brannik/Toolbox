@@ -24,6 +24,7 @@ public class btConn extends Activity {
     InputStream mmInputStream;
     volatile boolean stopWorker;
     Integer counter=0;
+    switches sw = new switches();
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +37,7 @@ public class btConn extends Activity {
         if(mBluetoothAdapter == null)
         {
             Log.d("DEBUG","Bluetooth not found");
+
         }
 
         if(!mBluetoothAdapter.isEnabled())
@@ -68,7 +70,7 @@ public class btConn extends Activity {
         mmInputStream = mmSocket.getInputStream();
 
         //beginListenForData();
-
+        sw.updateBluethhothState(true);
         Log.d("DEBUG","Bluetooth OPENED");
     }
 
@@ -117,6 +119,7 @@ public class btConn extends Activity {
         mmOutputStream.close();
         mmInputStream.close();
         mmSocket.close();
+        sw.updateBluethhothState(false);
         Log.d("DEBUG","Bluetooth closed");
     }
 

@@ -39,6 +39,7 @@ public class allinone extends AppWidgetProvider {
     switches switchFunc = new switches();
     String reader="";
     String readerTmp="";
+    String btStat="";
     @SuppressLint("WrongConstant")
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
@@ -64,7 +65,8 @@ public class allinone extends AppWidgetProvider {
         }
         reader = switchFunc.getStates(INTERIOR_BTN_EVENT);
         readerTmp = switchFunc.getStates(DRL_BTN_EVENT);
-        status(readerTmp,reader);
+        btStat = switchFunc.getStates("bluetooth");
+        status(readerTmp,reader,btStat);
     }
 
 
@@ -108,9 +110,9 @@ public class allinone extends AppWidgetProvider {
         //Log.d("DEBUG", ">>ON UPDATE <<");
     }
 
-    public void status(String drl,String inter){
+    public void status(String drl,String inter,String btStatus){
         int statusBarHeight = 0;
-        String msg,msg2,msg3,msg4;
+        String msg,msg2,msg3,msg4,msg5,msg6;
         int resourceId = applicationContext.getResources().getIdentifier("status_bar_height", "dimen", "android");
         if (resourceId > 0) statusBarHeight = applicationContext.getResources().getDimensionPixelSize(resourceId);
 
@@ -121,7 +123,7 @@ public class allinone extends AppWidgetProvider {
                 WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN,    // Keeps the button presses from going to the background window and Draws over status bar
                 PixelFormat.TRANSLUCENT);
         parameters.gravity = Gravity.TOP | Gravity.CENTER;
-        parameters.width = 185;
+        parameters.width = 210;
 
         LinearLayout ll = new LinearLayout(applicationContext);
         ll.setBackgroundColor(Color.BLACK);
@@ -155,7 +157,7 @@ public class allinone extends AppWidgetProvider {
         tv3.setLayoutParams(tvParameters3);
         tv3.setTextColor(Color.WHITE);
         tv3.setGravity(Gravity.CENTER);
-        msg3 = "  INTERIOR ";
+        msg3 = "  INT ";
         tv3.setText(msg3);
         ll.addView(tv3);
 
@@ -171,6 +173,28 @@ public class allinone extends AppWidgetProvider {
         msg4 =  inter;
         tv4.setText(msg4);
         ll.addView(tv4);
+
+        TextView tv6 = new TextView(applicationContext);
+        ViewGroup.LayoutParams tvParameters6 = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        tv6.setLayoutParams(tvParameters6);
+        tv6.setTextColor(Color.WHITE);
+        tv6.setGravity(Gravity.CENTER);
+        msg6 = "  BT ";
+        tv6.setText(msg6);
+        ll.addView(tv6);
+
+        TextView tv5 = new TextView(applicationContext);
+        ViewGroup.LayoutParams tvParameters5 = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        tv5.setLayoutParams(tvParameters5);
+        if(btStatus.equals("ONLINE")){
+            tv5.setTextColor(Color.GREEN);
+        }else{
+            tv5.setTextColor(Color.RED);
+        }
+        tv5.setGravity(Gravity.CENTER);
+        msg5 =  btStatus;
+        tv5.setText(msg5);
+        ll.addView(tv5);
 
         WindowManager windowManager = (WindowManager) applicationContext.getSystemService(applicationContext.WINDOW_SERVICE);
         windowManager.addView(ll, parameters);
