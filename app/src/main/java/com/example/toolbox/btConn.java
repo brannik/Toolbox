@@ -86,39 +86,9 @@ public class btConn extends Activity {
 
         beginListenForData();
         //listenBt();
-        //listeBluetooth();
         sw.updateBluethhothState(true);
         Log.d("DEBUG","Bluetooth OPENED");
 
-    }
-    void listeBluetooth(){
-        final Handler handler = new Handler();
-        Thread thread = new Thread() {
-            @Override
-            public void run() {
-                try {
-                    while(true) {
-                        sleep(1000);
-                        Log.d("DEBUG","Handler iteration");
-                        final int BUFFER_SIZE = 1024;
-                        byte[] buffer = new byte[BUFFER_SIZE];
-                        int bytes = 0;
-                            try {
-                                bytes = mmInputStream.read(buffer, bytes, BUFFER_SIZE - bytes);
-
-                                Log.d("DEBUG", "MSG>>> " + buffer[bytes]);
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-                        handler.post(this);
-                    }
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        };
-
-        thread.start();
     }
 
     void beginListenForData() {
