@@ -98,18 +98,15 @@ public class btConn extends Activity {
         Log.d("DEBUG","Bluetooth OPENED");
 
     }
-    Context context = MainActivity.getContextOfApplication();
-
     void beginListenForData() {
         workerThread = new Thread(new Runnable() {
             public void run() {
                 // read mmInputStream and get data from it
                 byte[] bytes = new byte[1000];
-                Looper.prepare();
                 StringBuilder x = new StringBuilder();
 
                 int numRead = 0;
-                while (true) {
+                while (mmSocket.isConnected()) {
                     try {
                         if (!((numRead = mmInputStream.read(bytes)) >= 0)) break;
                     } catch (IOException e) {
@@ -117,11 +114,8 @@ public class btConn extends Activity {
                     }
                     x.setLength(0);
                     x.append(new String(bytes, 0, numRead));
-                    Log.d("DEBUG","-> " + x);
-                    Toast.makeText(context, x, Toast.LENGTH_LONG).show();
-                    // call functions to responce of arduino reply
+                    Log.d("DEBUG","[BLUETOOTH]=> " + x);
                 }
-                Looper.loop();
             }
         });
         workerThread.start();
