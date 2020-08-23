@@ -33,7 +33,6 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
         return contextOfApplication;
     }
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +41,6 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
         startService(new Intent(this, worker.class));
 
         // TO DO START BLUETOOTH LISTENER IN BACKGROUND
-
 
         checkPrefs();
         TextView txtDrlDelay = findViewById(R.id.editDrlDelay);

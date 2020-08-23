@@ -1,14 +1,22 @@
 package com.example.toolbox;
 import android.app.Activity;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationCompat.Builder;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -90,11 +98,30 @@ public class btConn extends Activity {
         Log.d("DEBUG","Bluetooth OPENED");
 
     }
+    Context context = MainActivity.getContextOfApplication();
 
     void beginListenForData() {
         workerThread = new Thread(new Runnable() {
             public void run() {
                 // read mmInputStream and get data from it
+                byte[] bytes = new byte[1000];
+                Looper.prepare();
+                StringBuilder x = new StringBuilder();
+
+                int numRead = 0;
+                while (true) {
+                    try {
+                        if (!((numRead = mmInputStream.read(bytes)) >= 0)) break;
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    x.setLength(0);
+                    x.append(new String(bytes, 0, numRead));
+                    Log.d("DEBUG","-> " + x);
+                    Toast.makeText(context, x, Toast.LENGTH_LONG).show();
+                    // call functions to responce of arduino reply
+                }
+                Looper.loop();
             }
         });
         workerThread.start();
