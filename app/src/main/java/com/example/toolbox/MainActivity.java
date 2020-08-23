@@ -42,8 +42,7 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
         startService(new Intent(this, worker.class));
 
         // TO DO START BLUETOOTH LISTENER IN BACKGROUND
-        Runnable runnable = new btListener();
-        new Thread(runnable).start();
+
 
         checkPrefs();
         TextView txtDrlDelay = findViewById(R.id.editDrlDelay);

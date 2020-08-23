@@ -5,13 +5,21 @@ import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.StringWriter;
+import java.io.UnsupportedEncodingException;
+import java.net.UnknownServiceException;
+import java.nio.charset.StandardCharsets;
+import java.nio.charset.UnmappableCharacterException;
 import java.util.Set;
 import java.util.UUID;
 
@@ -23,12 +31,16 @@ public class btConn extends Activity {
     OutputStream mmOutputStream;
     InputStream mmInputStream;
     volatile boolean stopWorker;
-    Integer counter=0;
+    Thread workerThread;
+    byte[] readBuffer;
+    int readBufferPosition;
+    int counter;
     switches sw = new switches();
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        Runnable runnable = new btListener();
+        new Thread(runnable).start();
     }
 
     void findBT()
@@ -72,9 +84,50 @@ public class btConn extends Activity {
         mmOutputStream = mmSocket.getOutputStream();
         mmInputStream = mmSocket.getInputStream();
 
-        //beginListenForData();
+        beginListenForData();
+        //listenBt();
+        //listeBluetooth();
         sw.updateBluethhothState(true);
         Log.d("DEBUG","Bluetooth OPENED");
+
+    }
+    void listeBluetooth(){
+        final Handler handler = new Handler();
+        Thread thread = new Thread() {
+            @Override
+            public void run() {
+                try {
+                    while(true) {
+                        sleep(1000);
+                        Log.d("DEBUG","Handler iteration");
+                        final int BUFFER_SIZE = 1024;
+                        byte[] buffer = new byte[BUFFER_SIZE];
+                        int bytes = 0;
+                            try {
+                                bytes = mmInputStream.read(buffer, bytes, BUFFER_SIZE - bytes);
+
+                                Log.d("DEBUG", "MSG>>> " + buffer[bytes]);
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        handler.post(this);
+                    }
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+
+        thread.start();
+    }
+
+    void beginListenForData() {
+        workerThread = new Thread(new Runnable() {
+            public void run() {
+                // read mmInputStream and get data from it
+            }
+        });
+        workerThread.start();
     }
 
     void updSett(String drlDefState,String drlDefDelay,String interDefState,String interDefDelay){
@@ -127,10 +180,6 @@ public class btConn extends Activity {
     }
 
     Boolean isItConnected(){
-        if(mmSocket.isConnected()){
-            return true;
-        }else{
-            return false;
-        }
+        return mmSocket.isConnected();
     }
 }
