@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
@@ -30,10 +31,11 @@ public class btConn extends Activity {
     int readBufferPosition;
     volatile boolean stopWorker;
     Integer counter=0;
+    String text;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        
+
     }
 
     void findBT()
@@ -78,8 +80,8 @@ public class btConn extends Activity {
         Log.d("DEBUG","Bluetooth OPENED");
     }
 
-    void beginListenForData()
-    {
+    void beginListenForData() {
+
         final Handler handler = new Handler(Looper.getMainLooper());
         final byte delimiter = 10; //This is the ASCII code for a newline character
 
@@ -114,7 +116,7 @@ public class btConn extends Activity {
                                     {
                                         public void run()
                                         {
-                                            Log.d("DEBUG","@>> " + data);
+                                            Log.d("DEBUG","@>> " + data.toString());
                                         }
                                     });
                                 }
@@ -150,11 +152,11 @@ public class btConn extends Activity {
         }else{
             findBT();
             try {
+                closeBT();
                 openBT();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            } catch (IOException ignored) {}
         }
+
     }
 
     void closeBT() throws IOException

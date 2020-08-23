@@ -73,10 +73,18 @@ public class worker extends Service {
         String tempOne,tempTwo;
         tempOne = func.getStates("drlButton");
         tempTwo = func.getStates("interiorBtn");
-        try {
-            bt.sendData(tempOne,tempTwo);
-        }catch (Exception ex)  {
-            Log.d("DEBUG","ERROR >> " + ex);
+        if(bt.mmSocket.isConnected()) {
+            try {
+                bt.sendData(tempOne, tempTwo);
+            } catch (Exception ex) {
+                Log.d("DEBUG", "ERROR >> " + ex);
+            }
+        }else{
+            bt.findBT();
+            try{
+                bt.closeBT();
+                bt.openBT();
+            }catch (Exception ignored){}
         }
 
     }
