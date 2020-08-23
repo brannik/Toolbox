@@ -72,11 +72,27 @@ public class btConn extends Activity {
         Log.d("DEBUG","Bluetooth OPENED");
     }
 
-
+    void updSett(String drlDefState,String drlDefDelay,String interDefState,String interDefDelay){
+        if(mmSocket.isConnected()) {
+            String msgA = "[INTERIOR STATE => " + interDefState + "] "+ "\n" + "[INTERIOR DELAY => " + interDefDelay + "]" + "\n" +" [DRL STATE => " + drlDefState + "]" + "\n" +"  [DRL DELAY => " + drlDefDelay + "]";
+            msgA += "\n";
+            try {
+                mmOutputStream.write(msgA.getBytes());
+            } catch (Exception ext) {
+                Log.d("DEBUG", "Error UPDATE DATA >> " + ext);
+            }
+            Log.d("DEBUG", "DATA HAS UPDATED");
+        }else{
+            findBT();
+            try {
+                closeBT();
+                openBT();
+            } catch (IOException ignored) {}
+        }
+    }
     void sendData(String drl,String inter) {
         if(mmSocket.isConnected()) {
-            counter++;
-            String msg = "[" + counter + "] DRL state -> [" + drl + "] | Interior state -> [" + inter + "]";
+            String msg = "[" +  counter + "] DRL state -> [" + drl +  "] " + "\n" +" Interior state -> [" + inter + "]";
             msg += "\n";
             try {
                 mmOutputStream.write(msg.getBytes());
@@ -102,5 +118,13 @@ public class btConn extends Activity {
         mmInputStream.close();
         mmSocket.close();
         Log.d("DEBUG","Bluetooth closed");
+    }
+
+    Boolean isItConnected(){
+        if(mmSocket.isConnected()){
+            return true;
+        }else{
+            return false;
+        }
     }
 }
