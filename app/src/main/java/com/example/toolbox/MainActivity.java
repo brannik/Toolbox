@@ -23,6 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import java.io.IOException;
 
 
 public class MainActivity extends AppCompatActivity  implements View.OnClickListener{
@@ -200,7 +201,5 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
         editor.commit();
         //status(drlState,interState);
     }
-
-
 }
 
