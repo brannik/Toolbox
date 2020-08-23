@@ -37,6 +37,7 @@ public class btConn extends Activity {
         if(mBluetoothAdapter == null)
         {
             Log.d("DEBUG","Bluetooth not found");
+            sw.updateBluethhothState(false);
 
         }
 
@@ -55,6 +56,8 @@ public class btConn extends Activity {
                 {
                     mmDevice = device;
                     break;
+                }else{
+                    sw.updateBluethhothState(false);
                 }
             }
         }
