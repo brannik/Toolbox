@@ -28,4 +28,6 @@
     <string name="tglInterior">Interior</string>
     <string name="tglInteriorOn">Auto ON</string>
     <string name="tglInteriorOff">OFF</string>
+
+    <string name="btnUpdText">UPDATE SETTINGS</string>
 </resources>

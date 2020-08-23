@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
         return contextOfApplication;
     }
 
+    btConn bt = new btConn();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,11 +49,13 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
         ToggleButton tglInterState = findViewById(R.id.tglInterState);
         Button btnDrlSave = findViewById(R.id.btnDrlDelay);
         Button btnInterSave = findViewById(R.id.btnInterDelay);
+        Button btnUpd = findViewById(R.id.btnUpdateSettings);
 
         tglDrlState.setOnClickListener(this);
         tglInterState.setOnClickListener(this);
         btnDrlSave.setOnClickListener(this);
         btnInterSave.setOnClickListener(this);
+        btnUpd.setOnClickListener(this);
 
         txtDrlDelay.setText(drlDelay);
         txtInterDelay.setText(interDelay);
@@ -182,6 +185,10 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
                     tmpTglInter.setChecked(false);
                 }
                 updateValues();
+                break;
+            case R.id.btnUpdateSettings:
+                checkPrefs();
+                // send data
                 break;
             default:
                 Toast.makeText(this,"Error",Toast.LENGTH_SHORT).show();

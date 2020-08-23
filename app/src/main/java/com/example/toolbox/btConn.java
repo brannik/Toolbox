@@ -94,6 +94,7 @@ public class btConn extends Activity {
 
     }
 
+
     void closeBT() throws IOException
     {
         stopWorker = true;
