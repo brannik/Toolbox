@@ -32,8 +32,8 @@ import java.util.TimerTask;
  */
 public class allinone extends AppWidgetProvider {
 
-    private static final String DRL_BTN_EVENT = "drlButton";
-    private static final String INTERIOR_BTN_EVENT = "interiorBtn";
+    private static final String DRL_BTN_EVENT = "drlState";
+    private static final String INTERIOR_BTN_EVENT = "interiorState";
     Context applicationContext = MainActivity.getContextOfApplication();
     RemoteViews remoteViews;
     switches switchFunc = new switches();
@@ -196,7 +196,7 @@ public class allinone extends AppWidgetProvider {
         tv5.setText(msg5);
         ll.addView(tv5);
 
-        WindowManager windowManager = (WindowManager) applicationContext.getSystemService(applicationContext.WINDOW_SERVICE);
+        WindowManager windowManager = (WindowManager) applicationContext.getSystemService(Context.WINDOW_SERVICE);
         windowManager.addView(ll, parameters);
     }
 

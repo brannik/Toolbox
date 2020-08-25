@@ -40,8 +40,6 @@ public class btConn extends Activity {
     InputStream mmInputStream;
     volatile boolean stopWorker;
     Thread workerThread;
-    byte[] readBuffer;
-    int readBufferPosition;
     int counter;
     switches sw = new switches();
     @Override
@@ -114,7 +112,8 @@ public class btConn extends Activity {
                     }
                     x.setLength(0);
                     x.append(new String(bytes, 0, numRead));
-                    Log.d("DEBUG","[BLUETOOTH]=> " + x);
+                    //Log.d("DEBUG","[BLUETOOTH]=> " + x);
+                    decodeMsg(x.toString());
                 }
             }
         });
@@ -172,5 +171,19 @@ public class btConn extends Activity {
 
     Boolean isItConnected(){
         return mmSocket.isConnected();
+    }
+
+    void decodeMsg(String msg){
+        switch(msg){
+            case "imConnected": // arduino is connected -> start functions
+
+                break;
+            case "sendSettings": // arduino ask for default settings
+
+                break;
+            default:
+                Log.d("DEBUG","FUNCTION DECODE_MSG ERROR");
+
+        }
     }
 }

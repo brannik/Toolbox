@@ -73,18 +73,30 @@ public class switches{
         editor.apply();
     }
 
-    public String getStates(String elem){
+    public String getStates(String elem/*elements: drlState/interiorState/bluetooth/drlDeffState/interiorDeffState/drlDelay/interiorDelay*/){
         checkPrefs();
 
         switch (elem){
-            case "drlButton":
+            case "drlState":
                 stateGetter = drlState;
                 break;
-            case "interiorBtn":
+            case "interiorState":
                 stateGetter = interState;
                 break;
             case "bluetooth":
                 stateGetter = btState;
+                break;
+            case "drlDeffState":
+                stateGetter = drlDeffState;
+                break;
+            case "interiorDeffState":
+                stateGetter = interDeffState;
+                break;
+            case "drlDelay":
+                stateGetter = drlDelay;
+                break;
+            case "interiorDelay":
+                stateGetter = interDelay;
                 break;
             default:
                 stateGetter = "error";
