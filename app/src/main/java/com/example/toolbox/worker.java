@@ -25,6 +25,8 @@ public class worker extends Service {
     public String oldTmp,oldTmmp;
     Context applicationContext = MainActivity.getContextOfApplication();
 
+
+
     public String drlDelay,interDelay,drlDeffState,interDeffState;
     public String oldDrlDef,oldInterDef,oldDrlDelay,oldInterDelay;
     switches func = new switches();
@@ -35,7 +37,7 @@ public class worker extends Service {
         return null;
     }
 
-
+    Boolean btnClicked;
     @Override
     public void onCreate() {
         super.onCreate();
@@ -48,7 +50,6 @@ public class worker extends Service {
         } catch (Exception e) {
             Log.d("DEBUG", "WORKER>> " + e);
         }
-
 
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {

@@ -33,12 +33,14 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
         return contextOfApplication;
     }
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         contextOfApplication = getApplicationContext();
         startService(new Intent(this, worker.class));
+
 
         // TO DO START BLUETOOTH LISTENER IN BACKGROUND
 
