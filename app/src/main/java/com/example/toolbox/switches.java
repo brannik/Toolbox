@@ -40,14 +40,14 @@ public class switches{
         checkPrefs();
         SharedPreferences.Editor editor = prefs.edit();
         switch (element){
-            case "drlButton":
+            case "drlState":
                 if(drlState.equals("OFF")){
                     drlState = "ON";
                 }else if(drlState.equals("ON")){
                     drlState = "OFF";
                 }
                 break;
-            case "interiorBtn":
+            case "interiorState":
                 if(interState.equals("ON")){
                     interState = "OFF";
                 }else if(interState.equals("OFF")){

@@ -55,21 +55,12 @@ public class worker extends Service {
                                       @Override
                                       public void run() {
                                           // Magic here
-                                          if(bt.isItConnected()){
                                               if(checkStates()){
                                                   sendCommand(UPDATE);
                                               }
                                               if(checkDefaults()){
                                                   sendCommand(UPDATE_DEFAULTS);
                                               }
-                                          }else{
-                                              bt.findBT();
-                                              try {
-                                                  bt.openBT();
-                                              } catch (IOException e) {
-                                                  e.printStackTrace();
-                                              }
-                                          }
                                       }
                                   },
                 0, 5000);   // 1000 Millisecond  = 1 second
@@ -108,8 +99,8 @@ public class worker extends Service {
         switch(command){
             case UPDATE:
                 String tempOne,tempTwo;
-                tempOne = func.getStates("drlButton");
-                tempTwo = func.getStates("interiorBtn");
+                tempOne = func.getStates("drlState");
+                tempTwo = func.getStates("interiorState");
                 if(bt.mmSocket.isConnected()) {
                     try {
                         bt.sendData(tempOne, tempTwo);

@@ -70,7 +70,7 @@ public class btConn extends Activity {
         {
             for(BluetoothDevice device : pairedDevices)
             {
-                if(device.getName().equals("Redmi note 8t"))
+                if(device.getName().equals("HC-06"))
                 {
                     mmDevice = device;
                     break;
@@ -122,7 +122,7 @@ public class btConn extends Activity {
 
     void updSett(String drlDefState,String drlDefDelay,String interDefState,String interDefDelay){
         if(mmSocket.isConnected()) {
-            String msgA = "[INTERIOR STATE => " + interDefState + "] "+ "\n" + "[INTERIOR DELAY => " + interDefDelay + "]" + "\n" +" [DRL STATE => " + drlDefState + "]" + "\n" +"  [DRL DELAY => " + drlDefDelay + "]";
+            String msgA = "drdst%"+drlDefState+"drdel"+drlDefDelay+"indst"+interDefState+"inddel"+interDefDelay;
             msgA += "\n";
             try {
                 mmOutputStream.write(msgA.getBytes());
@@ -140,8 +140,8 @@ public class btConn extends Activity {
     }
     void sendData(String drl,String inter) {
         if(mmSocket.isConnected()) {
-            String msg = "[" +  counter + "] DRL state -> [" + drl +  "] " + "\n" +" Interior state -> [" + inter + "]";
-            msg += "\n";
+            String msg = "drl%" + drl + "&int%" + inter;
+            msgA += "\n";
             try {
                 mmOutputStream.write(msg.getBytes());
             } catch (Exception ex) {

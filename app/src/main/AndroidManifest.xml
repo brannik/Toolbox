@@ -30,10 +30,6 @@
         <service
             android:name=".worker"
             android:enabled="true" />
-        <service
-            android:name=".widgetUpdater"
-            android:enabled="true"
-            tools:ignore="Instantiatable" />
 
         <receiver
             android:name=".allinone"
