@@ -141,7 +141,7 @@ public class btConn extends Activity {
     void sendData(String drl,String inter) {
         if(mmSocket.isConnected()) {
             String msg = "drl%" + drl + "&int%" + inter;
-            msgA += "\n";
+            msg += "\n";
             try {
                 mmOutputStream.write(msg.getBytes());
             } catch (Exception ex) {
