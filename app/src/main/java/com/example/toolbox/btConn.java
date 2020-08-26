@@ -122,7 +122,7 @@ public class btConn extends Activity {
 
     void updSett(String drlDefState,String drlDefDelay,String interDefState,String interDefDelay){
         if(mmSocket.isConnected()) {
-            String msgA = "drdst%"+drlDefState+"drdel%"+drlDefDelay+"indst%"+interDefState+"inddel%"+interDefDelay;
+            String msgA = "drdst%"+drlDefState+"&drdel%"+drlDefDelay+"&indst%"+interDefState+"&inddel%"+interDefDelay;
             msgA += "\n";
             try {
                 mmOutputStream.write(msgA.getBytes());
