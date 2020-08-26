@@ -122,7 +122,7 @@ public class btConn extends Activity {
 
     void updSett(String drlDefState,String drlDefDelay,String interDefState,String interDefDelay){
         if(mmSocket.isConnected()) {
-            String msgA = "drdst%"+drlDefState+"&drdel%"+drlDefDelay+"&indst%"+interDefState+"&inddel%"+interDefDelay;
+            String msgA = "2&"+ drlDefState+"&"+drlDefDelay+"&"+interDefState+"&"+interDefDelay;
             msgA += "\n";
             try {
                 mmOutputStream.write(msgA.getBytes());
@@ -140,7 +140,7 @@ public class btConn extends Activity {
     }
     void sendData(String drl,String inter) {
         if(mmSocket.isConnected()) {
-            String msg = "drl%" + drl + "&int%" + inter;
+            String msg = "1&" + drl + "&" + inter;
             msg += "\n";
             try {
                 mmOutputStream.write(msg.getBytes());
@@ -174,16 +174,18 @@ public class btConn extends Activity {
     }
 
     void decodeMsg(String msg){
+
         switch(msg){
             case "imConnected": // arduino is connected -> start functions
-
+                Log.d("DEBUG","Arduino is connected");
+                msg="";
                 break;
             case "sendSettings": // arduino ask for default settings
-
+                msg="";
                 break;
             default:
-                Log.d("DEBUG","FUNCTION DECODE_MSG ERROR");
-
+                Log.d("DEBUG",msg);
+                msg="";
         }
     }
 }
