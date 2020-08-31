@@ -8,9 +8,11 @@ import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -42,11 +44,23 @@ public class btConn extends Activity {
     Thread workerThread;
     int counter;
     switches sw = new switches();
+
+    String drlDelay,interDelay,interDeffState,drlDeffState,drlState,interState;
+    Context applicationContext = MainActivity.getContextOfApplication();
+    private void checkPrefs() {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(applicationContext);
+        drlDelay = prefs.getString("drlDelay", null);
+        interDelay = prefs.getString("interDelay", null);
+        drlDeffState = prefs.getString("drlDeffState", null);
+        interDeffState = prefs.getString("interDeffState", null);
+
+        drlState = prefs.getString("drlState",null);
+        interState = prefs.getString("interState",null);
+    }
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Runnable runnable = new btListener();
-        new Thread(runnable).start();
     }
 
     void findBT()
@@ -176,11 +190,13 @@ public class btConn extends Activity {
     void decodeMsg(String msg){
 
         switch(msg){
-            case "imConnected": // arduino is connected -> start functions
+            case "1": // arduino is connected -> start functions
                 Log.d("DEBUG","Arduino is connected");
                 msg="";
                 break;
-            case "sendSettings": // arduino ask for default settings
+            case "2": // arduino ask for default settings
+                checkPrefs();
+                updSett(drlDeffState,drlDelay,interDeffState,interDelay);
                 msg="";
                 break;
             default:
