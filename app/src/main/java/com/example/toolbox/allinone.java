@@ -63,10 +63,10 @@ public class allinone extends AppWidgetProvider {
             //Log.d("DEBUG", "Refresh");
 
         }
-        reader = switchFunc.getStates(INTERIOR_BTN_EVENT);
-        readerTmp = switchFunc.getStates(DRL_BTN_EVENT);
-        btStat = switchFunc.getStates("bluetooth");
-        status(readerTmp,reader,btStat);
+            reader = switchFunc.getStates(INTERIOR_BTN_EVENT);
+            readerTmp = switchFunc.getStates(DRL_BTN_EVENT);
+            btStat = switchFunc.getStates("bluetooth");
+            status(readerTmp,reader,btStat);
     }
 
 

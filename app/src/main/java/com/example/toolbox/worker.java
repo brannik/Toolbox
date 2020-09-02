@@ -24,7 +24,7 @@ public class worker extends Service {
     public String tmp,tmmp;
     public String oldTmp,oldTmmp;
     Context applicationContext = MainActivity.getContextOfApplication();
-
+    public boolean checkedF = false;
 
 
     public String drlDelay,interDelay,drlDeffState,interDeffState;
@@ -37,7 +37,6 @@ public class worker extends Service {
         return null;
     }
 
-    Boolean btnClicked;
     @Override
     public void onCreate() {
         super.onCreate();
@@ -148,6 +147,12 @@ public class worker extends Service {
 
         tmp = prefs.getString("drlState",null);
         tmmp = prefs.getString("interState",null);
+        if(checkedF == false){
+            oldTmp = tmp;
+            oldTmmp = tmmp;
+            checkedF = true;
+        }
+
     }
 
     @Override
