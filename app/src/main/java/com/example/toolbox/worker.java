@@ -64,14 +64,12 @@ public class worker extends Service {
                                               if(checkDefaults()){
                                                   sendCommand(UPDATE_DEFAULTS);
                                               }
-                                          updateWidgets();
+
 
                                       }
+
                                   },
                 0, 5000);   // 1000 Millisecond  = 1 second
-
-    }
-    public void updateWidgets(){
         Intent intent = new Intent(this, allinone.class);
         intent.setAction("android.appwidget.action.APPWIDGET_UPDATE");
         int ids[] = AppWidgetManager.getInstance(getApplication()).getAppWidgetIds(new ComponentName(getApplication(), allinone.class));
