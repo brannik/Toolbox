@@ -91,6 +91,8 @@ public class allinone extends AppWidgetProvider {
 
             onUpdate(context);
             //Log.d("DEBUG", "BTN INTER CLICK");
+        }else{
+            onUpdate(context);
         }
     }
 

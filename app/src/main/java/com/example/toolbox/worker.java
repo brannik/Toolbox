@@ -1,5 +1,7 @@
 package com.example.toolbox;
 import android.app.Service;
+import android.appwidget.AppWidgetManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -23,6 +25,7 @@ public class worker extends Service {
     public static final String UPDATE_DEFAULTS = "update_DEFAULTS_send_to_arduino";
     public String tmp,tmmp;
     public String oldTmp,oldTmmp;
+    Boolean firstRun = true;
     Context applicationContext = MainActivity.getContextOfApplication();
     public boolean checkedF = false;
 
@@ -64,6 +67,14 @@ public class worker extends Service {
                                       }
                                   },
                 0, 5000);   // 1000 Millisecond  = 1 second
+        if(firstRun){
+            Intent intent = new Intent(this, allinone.class);
+            intent.setAction("android.appwidget.action.APPWIDGET_UPDATE");
+            int ids[] = AppWidgetManager.getInstance(getApplication()).getAppWidgetIds(new ComponentName(getApplication(), allinone.class));
+            intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS,ids);
+            sendBroadcast(intent);
+            firstRun = false;
+        }
     }
     public Boolean checkStates(){
         Boolean changed = false;

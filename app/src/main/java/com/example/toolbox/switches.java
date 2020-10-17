@@ -14,6 +14,7 @@ public class switches{
     private void checkPrefs(){
 
         if (prefs.contains("drlState") & prefs.contains("bluetoothState")) {
+            //if is dark dont autoturn on DRL and auto turn on INTERIOR
             drlState = prefs.getString("drlState",null);
             interState = prefs.getString("interState",null);
             drlDelay = prefs.getString("drlDelay",null);
