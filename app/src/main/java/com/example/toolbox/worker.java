@@ -64,17 +64,19 @@ public class worker extends Service {
                                               if(checkDefaults()){
                                                   sendCommand(UPDATE_DEFAULTS);
                                               }
+                                          updateWidgets();
+
                                       }
                                   },
                 0, 5000);   // 1000 Millisecond  = 1 second
-        if(firstRun){
-            Intent intent = new Intent(this, allinone.class);
-            intent.setAction("android.appwidget.action.APPWIDGET_UPDATE");
-            int ids[] = AppWidgetManager.getInstance(getApplication()).getAppWidgetIds(new ComponentName(getApplication(), allinone.class));
-            intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS,ids);
-            sendBroadcast(intent);
-            firstRun = false;
-        }
+
+    }
+    public void updateWidgets(){
+        Intent intent = new Intent(this, allinone.class);
+        intent.setAction("android.appwidget.action.APPWIDGET_UPDATE");
+        int ids[] = AppWidgetManager.getInstance(getApplication()).getAppWidgetIds(new ComponentName(getApplication(), allinone.class));
+        intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS,ids);
+        sendBroadcast(intent);
     }
     public Boolean checkStates(){
         Boolean changed = false;
