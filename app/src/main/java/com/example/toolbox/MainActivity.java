@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
         setContentView(R.layout.activity_main);
         contextOfApplication = getApplicationContext();
         startService(new Intent(this, worker.class));
-
+        startService(new Intent(this, screenState.class));
 
         // TO DO START BLUETOOTH LISTENER IN BACKGROUND
 
@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
         // get data from shared preferences
 
 
-        applyStatusBar("Testing notification services",1);
+        //applyStatusBar("Testing notification services",1);
         //status("ON","OFF");
         // Get teh view params
 

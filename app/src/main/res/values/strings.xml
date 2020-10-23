@@ -30,4 +30,10 @@
     <string name="tglInteriorOff">OFF</string>
 
     <string name="btnUpdText">UPDATE SETTINGS</string>
+
+    <string name="timeLabel">Daytime setup</string>
+
+    <string name="fromH"> FROM: </string>
+    <string name="toH"> TO :</string>
+    <string name="btnSave">SAVE</string>
 </resources>

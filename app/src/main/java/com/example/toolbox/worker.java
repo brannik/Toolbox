@@ -70,11 +70,7 @@ public class worker extends Service {
 
                                   },
                 0, 5000);   // 1000 Millisecond  = 1 second
-        Intent intent = new Intent(this, allinone.class);
-        intent.setAction("android.appwidget.action.APPWIDGET_UPDATE");
-        int ids[] = AppWidgetManager.getInstance(getApplication()).getAppWidgetIds(new ComponentName(getApplication(), allinone.class));
-        intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS,ids);
-        sendBroadcast(intent);
+
     }
     public Boolean checkStates(){
         Boolean changed = false;

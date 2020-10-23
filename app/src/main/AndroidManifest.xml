@@ -26,28 +26,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <service
-            android:name=".screenState"
-            android:exported="false"></service>
+        <service android:name=".screenState"
+            android:enabled="true"
+            android:exported="false"/>
         <service
             android:name=".worker"
             android:enabled="true" />
-
-        <receiver
-            android:name=".allinone"
-            android:enabled="true"
-            android:label="ButtonsWidget">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_ENABLED" />
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-                <action android:name="android.appwidget.action.APPWIDGET_DELETED" />
-                <action android:name="android.appwidget.action.APPWIDGET_DISABLED" />
-            </intent-filter>
-
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/allinone_info" />
-        </receiver>
+        
 
         <activity android:name=".MainActivity">
             <intent-filter>
