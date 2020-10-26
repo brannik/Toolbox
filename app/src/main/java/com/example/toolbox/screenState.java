@@ -80,7 +80,7 @@ public class screenState extends Service {
                 WindowManager.LayoutParams.WRAP_CONTENT,
                 statusBarHeight,
                 WindowManager.LayoutParams.TYPE_TOAST,   // Allows the view to be on top of the StatusBar
-                WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN,    // Keeps the button presses from going to the background window and Draws over status bar
+                WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN,     // Keeps the button presses from going to the background window and Draws over status bar
                 PixelFormat.TRANSLUCENT);
         parameters.gravity = Gravity.BOTTOM | Gravity.LEFT;
         parameters.width = 220;
@@ -95,6 +95,7 @@ public class screenState extends Service {
         ll.setLayoutParams(layoutParameteres);
         ll.setPadding(10,10,10,10);
         Button btn = new Button(applicationContext);
+        btn.setShadowLayer(15,0,0,Color.BLUE);
         if(drl.equals("ON")){
             btn.setText("DRL");
             btn.setTextColor(Color.CYAN);
@@ -116,6 +117,7 @@ public class screenState extends Service {
         ll.addView(btn);
 
         Button btn1 = new Button(applicationContext);
+        btn1.setShadowLayer(15,0,0,Color.BLUE);
         if(inter.equals("ON")){
             btn1.setText("INT");
             btn1.setTextColor(Color.CYAN);
@@ -137,6 +139,7 @@ public class screenState extends Service {
         ll.addView(btn1);
 
         Button btn2 = new Button(applicationContext);
+        btn2.setShadowLayer(15,0,0,Color.BLUE);
         btn2.setText("DVR ON");
         btn2.setTextColor(Color.CYAN);
         btn2.setWidth(50);
@@ -148,12 +151,15 @@ public class screenState extends Service {
         ll.addView(btn2);
 
         Button btn3 = new Button(applicationContext);
+
         if(btStatus.equals("ONLINE")){
             btn3.setText(btStatus);
             btn3.setTextColor(Color.GREEN);
+            btn3.setShadowLayer(15,0,0,Color.GREEN);
         }else{
             btn3.setText(btStatus);
             btn3.setTextColor(Color.RED);
+            btn3.setShadowLayer(15,0,0,Color.RED);
         }
 
         btn3.setWidth(50);
