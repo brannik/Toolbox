@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="Gradle: io.palaima:smoothbluetooth:0.1.0@aar">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/88910d21cc1cfd7045454e33adda2d72/jetified-smoothbluetooth-0.1.0/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/88910d21cc1cfd7045454e33adda2d72/jetified-smoothbluetooth-0.1.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/88910d21cc1cfd7045454e33adda2d72/jetified-smoothbluetooth-0.1.0/res" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.palaima/smoothbluetooth/0.1.0/fd0bc5b0fc9664c32873bcbef596cc701d3b2e04/smoothbluetooth-0.1.0-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.palaima/smoothbluetooth/0.1.0/90e288a9414c37da13482380947e7200353ed322/smoothbluetooth-0.1.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
